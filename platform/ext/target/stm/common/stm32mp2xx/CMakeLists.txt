@@ -342,6 +342,7 @@ if(BL2)
             ${STM_FAMILLY_DIR}/native_driver/src/entropy/stm32_rng.c
             ${STM_FAMILLY_DIR}/native_driver/src/i2c/stm32_i2c.c
             ${STM_FAMILLY_DIR}/native_driver/src/regulator/stm32mp2_pmic.c
+            ${STM_FAMILLY_DIR}/native_driver/src/eeprom/stm32mp2_eeprom.c
             ${STM_FAMILLY_DIR}/native_driver/src/regulator/stm32mp25_pwr_regul.c
             ${STM_FAMILLY_DIR}/native_driver/src/ddr/stm32mp2_ram.c
             ${STM_FAMILLY_DIR}/native_driver/src/power/stm32mp2_pwr.c
