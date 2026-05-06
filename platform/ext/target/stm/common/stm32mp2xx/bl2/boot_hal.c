@@ -30,9 +30,13 @@
 #include <stm32_dcache.h>
 #include <stm32_tamp.h>
 #include <stm_version.h>
+
 #include <watchdog.h>
 
 #include <tfm_plat_bl2_fwu.h>
+
+#include <stm32mp2_eeprom.h>
+#include <lib/mmio.h>
 
 #ifdef CRYPTO_HW_ACCELERATOR
 #include "crypto_hw.h"
@@ -185,6 +189,10 @@ SYS_INIT(stm32mp2_watchdog_init, POST_CORE, 1);
   */
 int32_t boot_platform_init(void)
 {
+	char name[STM32_SOC_NAME_SIZE];
+	uint8_t eeprom_data[10];
+	uint32_t word;
+
 	sys_init_run_level(INIT_LEVEL_PRE_CORE);
 
 	if (IS_ENABLED(STM32_CACHE_ENABLED)) {
@@ -198,6 +206,37 @@ int32_t boot_platform_init(void)
 	sys_init_run_level(INIT_LEVEL_CORE);
 
 	tfm_plat_bl2_notify_init();
+
+	if (read_eeprom_i2c8(0x50, 0x2, eeprom_data, 10))
+	{
+		if (eeprom_data[1] == 0xff)
+		{
+			BOOT_LOG_WRN("Wrong value on eeprom\n");
+		}
+		else
+		{
+			word = eeprom_data[1] | (eeprom_data[2] << 8) | (eeprom_data[3] << 16) | (eeprom_data[4] << 24);
+			mmio_write_32(TAMP_BASE_NS + TAMP_CONFIG_PHYTEC, word);
+			word = eeprom_data[5] | (eeprom_data[6] << 8) | (eeprom_data[7] << 16) | (eeprom_data[8] << 24);
+			mmio_write_32(TAMP_BASE_NS + TAMP_CONFIG_PHYTEC + 4, word);
+			word = eeprom_data[9];
+			mmio_write_32(TAMP_BASE_NS + TAMP_CONFIG_PHYTEC + 8, word);
+		}
+	}
+
+	BOOT_LOG_INF("welcome to MCUboot: "MODEL_VERSION);
+
+	if (get_chip_info(name) == TFM_PLAT_ERR_SUCCESS)
+		BOOT_LOG_INF("cpu: %s", name);
+
+	BOOT_LOG_INF("board: "MODEL_BOARD);
+
+	if (get_board_info(name) == TFM_PLAT_ERR_SUCCESS)
+		BOOT_LOG_INF("board ID: %s", name);
+
+	BOOT_LOG_INF("dts: "MODEL_BL2_DTS);
+	BOOT_LOG_INF("boot device: "MODEL_BOOT_DEV);
+	BOOT_LOG_INF("mcu sysclk: %d", SystemCoreClock);
 
 	return 0;
 }
