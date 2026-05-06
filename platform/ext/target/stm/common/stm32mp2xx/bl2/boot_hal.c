@@ -30,6 +30,8 @@
 #include <stm32_dcache.h>
 #include <stm32_tamp.h>
 #include <stm_version.h>
+#include <stm32mp2_eeprom.h>
+#include <lib/mmio.h>
 
 #ifdef CRYPTO_HW_ACCELERATOR
 #include "crypto_hw.h"
@@ -491,6 +493,8 @@ SYS_INIT(stm32mp2_prep_a35_fw, CORE, 30);
 int32_t boot_platform_init(void)
 {
 	char name[STM32_SOC_NAME_SIZE];
+	uint8_t eeprom_data[10];
+	uint32_t word;
 
 	sys_init_run_level(INIT_LEVEL_PRE_CORE);
 
@@ -503,6 +507,24 @@ int32_t boot_platform_init(void)
 	}
 
 	sys_init_run_level(INIT_LEVEL_CORE);
+
+
+	if (read_eeprom_i2c8(0x50, 0x2, eeprom_data, 10))
+	{
+		if (eeprom_data[1] == 0xff)
+		{
+			BOOT_LOG_WRN("Wrong value on eeprom\n");
+		}
+		else
+		{
+			word = eeprom_data[1] | (eeprom_data[2] << 8) | (eeprom_data[3] << 16) | (eeprom_data[4] << 24);
+			mmio_write_32(TAMP_BASE_NS + TAMP_CONFIG_PHYTEC, word);
+			word = eeprom_data[5] | (eeprom_data[6] << 8) | (eeprom_data[7] << 16) | (eeprom_data[8] << 24);
+			mmio_write_32(TAMP_BASE_NS + TAMP_CONFIG_PHYTEC + 4, word);
+			word = eeprom_data[9];
+			mmio_write_32(TAMP_BASE_NS + TAMP_CONFIG_PHYTEC + 8, word);
+		}
+	}
 
 	BOOT_LOG_INF("welcome to MCUboot: "MODEL_VERSION);
 
