@@ -406,6 +406,7 @@ if(BL2)
 	    ${STM_FAMILY_DIR}/native_driver/src/watchdog/stm32_iwdg.c
             ${STM_FAMILY_DIR}/native_driver/src/i2c/stm32_i2c.c
             ${STM_FAMILY_DIR}/native_driver/src/regulator/stm32mp2_pmic.c
+            ${STM_FAMILLY_DIR}/native_driver/src/eeprom/stm32mp2_eeprom.c
             ${STM_FAMILY_DIR}/native_driver/src/regulator/stm32mp25_pwr_regu.c
             ${STM_FAMILY_DIR}/native_driver/src/ddr/stm32mp2_ram.c
             ${STM_FAMILY_DIR}/native_driver/src/power/stm32mp2_pwr.c
