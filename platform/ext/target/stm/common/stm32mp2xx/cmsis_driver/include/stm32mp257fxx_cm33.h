@@ -511,7 +511,7 @@ typedef struct
 {
   __IO uint32_t FVRw[384];       /*!< BSEC fuse word (0-383) value register    Address offset: 0x000-0x5FC */
        uint32_t RESERVED0[128];  /*!< Reserved                                 Address offset: 0x600-0x7FC */
-  __IO uint32_t SPLOCKx[12];     /*!< BSEC sticky program lock register (0-11), */ 
+  __IO uint32_t SPLOCKx[12];     /*!< BSEC sticky program lock register (0-11), */
        uint32_t RESERVED1[4];    /*!< Reserved                                 Address offset: 0x830-0x83C */
   __IO uint32_t SWLOCKx[12];     /*!< BSEC sticky write lock register (0-11),      Address offset: 0x840-0x86C */
        uint32_t RESERVED2[4];    /*!< Reserved                                 Address offset: 0x870-0x87C */
@@ -539,7 +539,7 @@ typedef struct
        uint32_t RESERVED10[34];  /*!< Reserved                                 Address offset: 0xF60-0xFE4 */
   __IO uint32_t HRCR;            /*!< BSEC hot reset count register            Address offset: 0xFE8 */
   __IO uint32_t WRCR;            /*!< BSEC warm reset count register           Address offset: 0xFEC */
-       uint32_t RESERVED11;      /*!< Reserved                                 Address offset: 0xFF0 */	
+       uint32_t RESERVED11;      /*!< Reserved                                 Address offset: 0xFF0 */
   __IO uint32_t VERR;            /*!< BSEC version register                    Address offset: 0xFF4 */
   __IO uint32_t IPIDR;           /*!< BSEC identification register             Address offset: 0xFF8 */
   __IO uint32_t SIDR;            /*!< BSEC size identification register        Address offset: 0xFFC */
@@ -784,7 +784,7 @@ typedef struct
 /*
  * @brief  (DCMIPP)
  */
-	
+
 #ifdef STM32MP25XX_SI_CUT1_X
 typedef struct
 {
@@ -1011,7 +1011,7 @@ typedef struct
   __IO uint32_t IPIDR;           /*!< DCMIP IP identification register                                   Address offset: 0xFF8 */
   __IO uint32_t SIDR;            /*!< DCMIPP size identification register                                Address offset: 0xFFC */
 } DCMIPP_TypeDef;
-#else 
+#else
 typedef struct
 {
   __IO uint32_t IPGR1;           /*!< DCMIPP IP-Plug global register 1                                   Address offset: 0x000 */
@@ -4506,7 +4506,7 @@ typedef struct
   USB3_GBL_TypeDef GBLREGS;         /*!< Global Register Block @ offset 0xc100 */
   USB3_DEV_TypeDef DEVREGS;         /*!< Global Register Block @ offset 0xc700 */
   USB3_BC_TypeDef BCREGS;           /*!< Global Register Block @ offset 0xcc00 */
-  USB3_LINK_TypeDef LINKREGS;       /*!< Global Register Block @ offset 0xd000 */    
+  USB3_LINK_TypeDef LINKREGS;       /*!< Global Register Block @ offset 0xd000 */
 } USB3_TypeDef;
 
 /**
@@ -30355,7 +30355,7 @@ typedef struct
 #define HASH_CR_DATATYPE          HASH_CR_DATATYPE_Msk                         /*!< Data type selection */
 #define HASH_CR_DATATYPE_0        (0x1U << HASH_CR_DATATYPE_Pos)               /*!< 0x00000010 */
 #define HASH_CR_DATATYPE_1        (0x2U << HASH_CR_DATATYPE_Pos)               /*!< 0x00000020 */
-#define HASH_CR_MODE_Pos          (6U)                                         
+#define HASH_CR_MODE_Pos          (6U)
 #define HASH_CR_MODE_Msk          (0x1U << HASH_CR_MODE_Pos)                   /*!< 0x00000040 */
 #define HASH_CR_MODE              HASH_CR_MODE_Msk                             /*!< Mode selection */
 #define HASH_CR_ALGO_0            (0x1U << HASH_CR_ALGO_Pos)
@@ -38701,7 +38701,7 @@ typedef struct
 
 /* PKA functions list */
 #define PKA_DEFINE_IN_CMSIS                       (1U)                             /*!< i.e. PKA operation define are in CMSIS device not in PKA_HAL header */
-     
+
 #define PKA_MODE_MODULAR_EXP                      ((uint32_t)0x00000000U)          /*!< Compute Montgomery parameter and modular exponentiation */
 #define PKA_MODE_MONTGOMERY_PARAM                 ((uint32_t)0x00000001U)          /*!< Compute Montgomery parameter only */
 #define PKA_MODE_MODULAR_EXP_FAST_MODE            ((uint32_t)0x00000002U)          /*!< Compute modular exponentiation only (fast, Montgomery parameter should be loaded) */
@@ -39263,7 +39263,7 @@ typedef struct
 #define PWR_R0CIDCFGR_SCID_Pos                 (4U)
 #define PWR_R0CIDCFGR_SCID_Msk                 (0x7U << PWR_R0CIDCFGR_SCID_Pos)             /*!< 0x00000070 */
 #define PWR_R0CIDCFGR_SCID                     PWR_R0CIDCFGR_SCID_Msk                       /*!< Static compartment identifier */
-										       
+
 /* Bit fields for PWR_R1CIDCFGR register */
 #define PWR_R1CIDCFGR_CFEN_Pos                 (0U)
 #define PWR_R1CIDCFGR_CFEN_Msk                 (0x1U << PWR_R1CIDCFGR_CFEN_Pos)
@@ -41309,7 +41309,7 @@ typedef struct
 #define RCC_BSECCFGR_BSECEN                          RCC_BSECCFGR_BSECEN_Msk                               /*!< BSEC clock enable */
 #define RCC_BSECCFGR_BSECLPEN_Pos                    (2U)
 #define RCC_BSECCFGR_BSECLPEN_Msk                    (0x1U << RCC_BSECCFGR_BSECLPEN_Pos)                   /*!< 0x00000004 */
-#define RCC_BSECCFGR_BSECLPEN                        RCC_BSECCFGR_BSECLPEN_Msk 
+#define RCC_BSECCFGR_BSECLPEN                        RCC_BSECCFGR_BSECLPEN_Msk
 
 /* Bit fields for RCC_PLL2CFGR1 register */
 #define RCC_PLL2CFGR1_SSMODRST_Pos                   (0U)
@@ -53993,6 +53993,9 @@ typedef struct
 #define TAMP_RCIDCFGR_CID_Msk       (0xFU << TAMP_RCIDCFGR_CID_Pos)                     /*!< 0x000000F0U */
 #define TAMP_RCIDCFGR_CID           TAMP_RCIDCFGR_CID_Msk
 
+/*******************  Bits definition for TAMP_CONFIG_PHYTEC register  *************/
+#define TAMP_CONFIG_PHYTEC		U(0x1D0)
+
 /********************  Bits definition for TAMP_BKP0R register  ***************/
 #define TAMP_BKP0R_Pos               (0U)
 #define TAMP_BKP0R_Msk               (0xFFFFFFFFU << TAMP_BKP0R_Pos)                   /*!< 0xFFFFFFFFU */
@@ -57677,7 +57680,7 @@ typedef struct
                                                  ((INSTANCE) == HPDMA3_Channel13_S) || ((INSTANCE) == HPDMA3_Channel13_NS) || \
                                                  ((INSTANCE) == HPDMA3_Channel14_S) || ((INSTANCE) == HPDMA3_Channel14_NS) || \
                                                  ((INSTANCE) == HPDMA3_Channel15_S) || ((INSTANCE) == HPDMA3_Channel15_NS))
-												
+
 #define IS_DMA_PFREQ_INSTANCE(INSTANCE) (((INSTANCE) == HPDMA1_Channel12_S) || ((INSTANCE) == HPDMA1_Channel12_NS) || \
                                          ((INSTANCE) == HPDMA1_Channel13_S) || ((INSTANCE) == HPDMA1_Channel13_NS) || \
                                          ((INSTANCE) == HPDMA1_Channel14_S) || ((INSTANCE) == HPDMA1_Channel14_NS) || \
@@ -57772,7 +57775,7 @@ typedef struct
                                        ((INSTANCE) == I2C8_S) || ((INSTANCE) == I2C8_NS))
 
 /******************* I2C Instances : Group belongingness *********************/
-#define IS_I2C_GRP1_INSTANCE(INSTANCE) (((INSTANCE) == I2C8_NS) || ((INSTANCE) == I2C8_S)) 
+#define IS_I2C_GRP1_INSTANCE(INSTANCE) (((INSTANCE) == I2C8_NS) || ((INSTANCE) == I2C8_S))
 
 /************** I2C Instances : wakeup capability from stop modes *************/
 #define IS_I2C_WAKEUP_FROMSTOP_INSTANCE(INSTANCE) IS_I2C_ALL_INSTANCE(INSTANCE)
@@ -57804,7 +57807,7 @@ typedef struct
 /******************************* IPCC Instances *******************************/
 #define IS_IPCC_ALL_INSTANCE(INSTANCE) (((INSTANCE) == IPCC1_S) || ((INSTANCE) == IPCC1_NS) || \
                                         ((INSTANCE) == IPCC2_S) || ((INSTANCE) == IPCC2_NS))
- 
+
 /******************************* IWDG Instances *******************************/
 #define IS_IWDG_ALL_INSTANCE(INSTANCE) (((INSTANCE) == IWDG1_S) || ((INSTANCE) == IWDG1_NS) || \
                                         ((INSTANCE) == IWDG2_S) || ((INSTANCE) == IWDG2_NS) || \
@@ -58771,7 +58774,7 @@ typedef struct
                                        ((INSTANCE) == I2C8))
 
 /******************* I2C Instances : Group belongingness *********************/
-#define IS_I2C_GRP1_INSTANCE(INSTANCE) ((INSTANCE) == I2C8) 
+#define IS_I2C_GRP1_INSTANCE(INSTANCE) ((INSTANCE) == I2C8)
 
 /************** I2C Instances : wakeup capability from stop modes *************/
 #define IS_I2C_WAKEUP_FROMSTOP_INSTANCE(INSTANCE) IS_I2C_ALL_INSTANCE(INSTANCE)
