@@ -26,6 +26,36 @@ properties:
     required: true
     description: name for the DDR configuration, a simple string for information
 
+  st,mem-name-512MBx32:
+    type: string
+    required: true
+    description: name for the DDR configuration, a simple string for information
+
+  st,mem-name-1GBx32:
+    type: string
+    required: true
+    description: name for the DDR configuration, a simple string for information
+
+  st,mem-name-4GBx32:
+    type: string
+    required: true
+    description: name for the DDR configuration, a simple string for information
+
+  st,mem-name-512MBx16:
+    type: string
+    required: true
+    description: name for the DDR configuration, a simple string for information
+
+  st,mem-name-1GBx16:
+    type: string
+    required: true
+    description: name for the DDR configuration, a simple string for information
+
+  st,mem-name-2GBx16:
+    type: string
+    required: true
+    description: name for the DDR configuration, a simple string for information
+
   st,mem-speed:
     type: int
     required: true
@@ -36,17 +66,97 @@ properties:
     required: true
     description: DDR mem size in bytes
 
+  st,mem-size-512MB:
+    type: int
+    required: true
+    description: DDR mem size in bytes
+
+  st,mem-size-1GB:
+    type: int
+    required: true
+    description: DDR mem size in bytes
+
+  st,mem-size-4GB:
+    type: int
+    required: true
+    description: DDR mem size in bytes
+
   st,ctl-reg:
     type: array
     required: true
     description: controller values depending on the DDR type
+
+  st,ddr-mstr-16bits:
+    type: int
+    required: true
+    description: mstr value depending on the DDR type
 
   st,ctl-timing:
     type: array
     required: true
     description: controller values depending on the DDR frequency and timing parameters
 
+  st,ddr-rfshtmg-512MB:
+    type: int
+    required: true
+    description: controller values depending on the DDR frequency and timing parameters
+
+  st,ddr-rfshtmg-1GB:
+    type: int
+    required: true
+    description: controller values depending on the DDR frequency and timing parameters
+
+  st,ddr-rfshtmg-4GB:
+    type: int
+    required: true
+    description: controller values depending on the DDR frequency and timing parameters
+
+  st,ddr-dramtmg14-512MB:
+    type: int
+    required: true
+    description: controller values depending on the DDR frequency and timing parameters
+
+  st,ddr-dramtmg14-1GB:
+    type: int
+    required: true
+    description: controller values depending on the DDR frequency and timing parameters
+
+  st,ddr-dramtmg14-4GB:
+    type: int
+    required: true
+    description: controller values depending on the DDR frequency and timing parameters
+
   st,ctl-map:
+    type: array
+    required: true
+    description: controller values depending on the address mapping
+
+  st,ctl-map-512MBx32:
+    type: array
+    required: true
+    description: controller values depending on the address mapping
+
+  st,ctl-map-512MBx16:
+    type: array
+    required: true
+    description: controller values depending on the address mapping
+
+  st,ctl-map-1GBx32:
+    type: array
+    required: true
+    description: controller values depending on the address mapping
+
+  st,ctl-map-1GBx16:
+    type: array
+    required: true
+    description: controller values depending on the address mapping
+
+  st,ctl-map-2GBx16:
+    type: array
+    required: true
+    description: controller values depending on the address mapping
+
+  st,ctl-map-4GBx32:
     type: array
     required: true
     description: controller values depending on the address mapping
@@ -60,6 +170,11 @@ properties:
     type: array
     required: true
     description: basic entry values for the PHYINIT driver
+
+  st,ddr-uib-numactivedbytedfi1-16:
+    type: int
+    required: true
+    description: basic entry value for the PHYINIT driver
 
   st,phy-advanced:
     type: array
