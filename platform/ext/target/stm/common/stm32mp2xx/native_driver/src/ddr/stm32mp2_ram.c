@@ -156,11 +156,22 @@ int stm32mp_board_ddr_power_init(enum ddr_type ddr_type)
 #define DDR_CLK_DEV	DEVICE_DT_GET(DT_INST_CLOCKS_CTLR(0))
 #define DDR_CLK_ID	DT_INST_CLOCKS_CELL(0, bits)
 
+enum {
+	EEPROM_RAM_SIZE_512MB_32 = '0',
+	EEPROM_RAM_SIZE_1GB_32 = '1',
+	EEPROM_RAM_SIZE_2GB_32 = '2',
+	EEPROM_RAM_SIZE_4GB_32 = '3',
+	EEPROM_RAM_SIZE_512MB_16 = '4',
+	EEPROM_RAM_SIZE_1GB_16 = '5',
+	EEPROM_RAM_SIZE_2GB_16 = '6',
+};
+
 int stm32mp2_ddr_dt_init(void)
 {
 	unsigned long ret;
 	struct clk *clk;
-
+	uint32_t word;
+	int config;
 	struct stm32mp_ddr_config drv_cfg = {
 		.info = {
 			.speed = DT_INST_PROP(0, st_mem_speed),
@@ -177,6 +188,24 @@ int stm32mp2_ddr_dt_init(void)
 		.uis = DT_INST_PROP(0, st_phy_swizzle),
 	};
 
+	size_t size_512mb = DT_INST_PROP(0, st_mem_size_512mb);
+	size_t size_1gb = DT_INST_PROP(0, st_mem_size_1gb);
+	size_t size_4gb = DT_INST_PROP(0, st_mem_size_4gb);
+	uint32_t mstr_16 = DT_INST_PROP(0, st_ddr_mstr_16bits);
+	struct stm32mp2_ddrctrl_map c_map_512mbx16 = DT_INST_PROP(0, st_ctl_map_512mbx16);
+	struct stm32mp2_ddrctrl_map c_map_512mbx32 = DT_INST_PROP(0, st_ctl_map_512mbx32);
+	struct stm32mp2_ddrctrl_map c_map_1gbx16 = DT_INST_PROP(0, st_ctl_map_1gbx16);
+	struct stm32mp2_ddrctrl_map c_map_1gbx32 = DT_INST_PROP(0, st_ctl_map_1gbx32);
+	struct stm32mp2_ddrctrl_map c_map_2gbx16 = DT_INST_PROP(0, st_ctl_map_2gbx16);
+	struct stm32mp2_ddrctrl_map c_map_4gbx32 = DT_INST_PROP(0, st_ctl_map_4gbx32);
+	uint32_t rfshtmg_512mb = DT_INST_PROP(0, st_ddr_rfshtmg_512mb);
+	uint32_t rfshtmg_1gb = DT_INST_PROP(0, st_ddr_rfshtmg_1gb);
+	uint32_t rfshtmg_4gb = DT_INST_PROP(0, st_ddr_rfshtmg_4gb);
+	uint32_t dramtmg14_512mb = DT_INST_PROP(0, st_ddr_dramtmg14_512mb);
+	uint32_t dramtmg14_1gb = DT_INST_PROP(0, st_ddr_dramtmg14_1gb);
+	uint32_t dramtmg14_4gb = DT_INST_PROP(0, st_ddr_dramtmg14_4gb);
+	uint32_t numactivedbytedfi1_16 = DT_INST_PROP(0, st_ddr_uib_numactivedbytedfi1_16);
+
 	struct stm32mp_ddr_priv drv_data = {
 		.info = {
 			.base = DDR_MEM_BASE,
@@ -187,6 +216,66 @@ int stm32mp2_ddr_dt_init(void)
 		.pwr = DT_REG_ADDR(DT_NODELABEL(pwr)),
 		.rcc = DT_REG_ADDR(DT_NODELABEL(rcc)),
 	};
+
+	word = mmio_read_32(TAMP_BASE_NS + TAMP_CONFIG_PHYTEC);
+	config = ((word >> 16) & 0xFF);
+
+	switch(config){
+	case EEPROM_RAM_SIZE_512MB_32:
+			IMSG("512MB 32 bits RAM configuration used");
+			drv_cfg.info.size = size_512mb;
+			drv_cfg.c_timing.rfshtmg = rfshtmg_512mb;
+			drv_cfg.c_timing.dramtmg14 = dramtmg14_512mb;
+			drv_cfg.c_map = c_map_512mbx32;
+		break;
+
+	case EEPROM_RAM_SIZE_1GB_32:
+			IMSG("1GB 32 bits RAM configuration used");
+			drv_cfg.info.size = size_1gb;
+			drv_cfg.c_timing.rfshtmg = rfshtmg_1gb;
+			drv_cfg.c_timing.dramtmg14 = dramtmg14_1gb;
+			drv_cfg.c_map = c_map_1gbx32;
+		break;
+
+	case EEPROM_RAM_SIZE_4GB_32:
+			IMSG("4GB 32 bits RAM configuration used");
+			drv_cfg.info.size = size_4gb;
+			drv_cfg.c_timing.rfshtmg = rfshtmg_4gb;
+			drv_cfg.c_timing.dramtmg14 = dramtmg14_4gb;
+			drv_cfg.c_map = c_map_4gbx32;
+		break;
+
+	case EEPROM_RAM_SIZE_512MB_16:
+			IMSG("512MB 16 bits RAM configuration used");
+			drv_cfg.info.size = size_512mb;
+			drv_cfg.c_reg.mstr = mstr_16;
+			drv_cfg.c_timing.rfshtmg = rfshtmg_512mb;
+			drv_cfg.c_timing.dramtmg14 = dramtmg14_512mb;
+			drv_cfg.c_map = c_map_512mbx16;
+			drv_cfg.uib.numactivedbytedfi1 = numactivedbytedfi1_16;
+		break;
+
+	case EEPROM_RAM_SIZE_1GB_16:
+			IMSG("1GB 16 bits RAM configuration used");
+			drv_cfg.info.size = size_1gb;
+			drv_cfg.c_reg.mstr = mstr_16;
+			drv_cfg.c_timing.rfshtmg = rfshtmg_1gb;
+			drv_cfg.c_timing.dramtmg14 = dramtmg14_1gb;
+			drv_cfg.c_map = c_map_1gbx16;
+			drv_cfg.uib.numactivedbytedfi1 = numactivedbytedfi1_16;
+		break;
+
+	case EEPROM_RAM_SIZE_2GB_16:
+			IMSG("2GB 16 bits RAM configuration used");
+			drv_cfg.c_reg.mstr = mstr_16;
+			drv_cfg.c_map = c_map_2gbx16;
+			drv_cfg.uib.numactivedbytedfi1 = numactivedbytedfi1_16;
+		break;
+
+	default :
+			IMSG("Default RAM configuration used");
+		break;
+	}
 
 	drv_cfg.self_refresh = false;
 
