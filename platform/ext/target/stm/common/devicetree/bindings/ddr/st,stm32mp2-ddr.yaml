@@ -96,32 +96,62 @@ properties:
     required: true
     description: controller values depending on the DDR frequency and timing parameters
 
-  st,ddr-rfshtmg-512MB:
+  st,ddr-rfshtmg-512MBx32:
     type: int
     required: true
     description: controller values depending on the DDR frequency and timing parameters
 
-  st,ddr-rfshtmg-1GB:
+  st,ddr-rfshtmg-512MBx16:
     type: int
     required: true
     description: controller values depending on the DDR frequency and timing parameters
 
-  st,ddr-rfshtmg-4GB:
+  st,ddr-rfshtmg-1GBx32:
     type: int
     required: true
     description: controller values depending on the DDR frequency and timing parameters
 
-  st,ddr-dramtmg14-512MB:
+  st,ddr-rfshtmg-1GBx16:
     type: int
     required: true
     description: controller values depending on the DDR frequency and timing parameters
 
-  st,ddr-dramtmg14-1GB:
+  st,ddr-rfshtmg-2GBx16:
     type: int
     required: true
     description: controller values depending on the DDR frequency and timing parameters
 
-  st,ddr-dramtmg14-4GB:
+  st,ddr-rfshtmg-4GBx32:
+    type: int
+    required: true
+    description: controller values depending on the DDR frequency and timing parameters
+
+  st,ddr-dramtmg14-512MBx32:
+    type: int
+    required: true
+    description: controller values depending on the DDR frequency and timing parameters
+
+  st,ddr-dramtmg14-512MBx16:
+    type: int
+    required: true
+    description: controller values depending on the DDR frequency and timing parameters
+
+  st,ddr-dramtmg14-1GBx32:
+    type: int
+    required: true
+    description: controller values depending on the DDR frequency and timing parameters
+
+  st,ddr-dramtmg14-1GBx16:
+    type: int
+    required: true
+    description: controller values depending on the DDR frequency and timing parameters
+
+  st,ddr-dramtmg14-2GBx16:
+    type: int
+    required: true
+    description: controller values depending on the DDR frequency and timing parameters
+
+  st,ddr-dramtmg14-4GBx32:
     type: int
     required: true
     description: controller values depending on the DDR frequency and timing parameters
