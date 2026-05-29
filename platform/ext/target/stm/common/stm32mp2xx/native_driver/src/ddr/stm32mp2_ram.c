@@ -202,12 +202,18 @@ int stm32mp2_ddr_dt_init(void)
 	struct stm32mp2_ddrctrl_map c_map_1gbx32 = DT_INST_PROP(0, st_ctl_map_1gbx32);
 	struct stm32mp2_ddrctrl_map c_map_2gbx16 = DT_INST_PROP(0, st_ctl_map_2gbx16);
 	struct stm32mp2_ddrctrl_map c_map_4gbx32 = DT_INST_PROP(0, st_ctl_map_4gbx32);
-	uint32_t rfshtmg_512mb = DT_INST_PROP(0, st_ddr_rfshtmg_512mb);
-	uint32_t rfshtmg_1gb = DT_INST_PROP(0, st_ddr_rfshtmg_1gb);
-	uint32_t rfshtmg_4gb = DT_INST_PROP(0, st_ddr_rfshtmg_4gb);
-	uint32_t dramtmg14_512mb = DT_INST_PROP(0, st_ddr_dramtmg14_512mb);
-	uint32_t dramtmg14_1gb = DT_INST_PROP(0, st_ddr_dramtmg14_1gb);
-	uint32_t dramtmg14_4gb = DT_INST_PROP(0, st_ddr_dramtmg14_4gb);
+	uint32_t rfshtmg_512mbx32 = DT_INST_PROP(0, st_ddr_rfshtmg_512mbx32);
+	uint32_t rfshtmg_512mbx16 = DT_INST_PROP(0, st_ddr_rfshtmg_512mbx16);
+	uint32_t rfshtmg_1gbx32 = DT_INST_PROP(0, st_ddr_rfshtmg_1gbx32);
+	uint32_t rfshtmg_1gbx16 = DT_INST_PROP(0, st_ddr_rfshtmg_1gbx16);
+	uint32_t rfshtmg_2gbx16 = DT_INST_PROP(0, st_ddr_rfshtmg_2gbx16);
+	uint32_t rfshtmg_4gbx32 = DT_INST_PROP(0, st_ddr_rfshtmg_4gbx32);
+	uint32_t dramtmg14_512mbx32 = DT_INST_PROP(0, st_ddr_dramtmg14_512mbx32);
+	uint32_t dramtmg14_512mbx16 = DT_INST_PROP(0, st_ddr_dramtmg14_512mbx16);
+	uint32_t dramtmg14_1gbx32 = DT_INST_PROP(0, st_ddr_dramtmg14_1gbx32);
+	uint32_t dramtmg14_1gbx16 = DT_INST_PROP(0, st_ddr_dramtmg14_1gbx16);
+	uint32_t dramtmg14_2gbx16 = DT_INST_PROP(0, st_ddr_dramtmg14_2gbx16);
+	uint32_t dramtmg14_4gbx32 = DT_INST_PROP(0, st_ddr_dramtmg14_4gbx32);
 	uint32_t numactivedbytedfi1_16 = DT_INST_PROP(0, st_ddr_uib_numactivedbytedfi1_16);
 
 	struct stm32mp_ddr_priv drv_data = {
@@ -228,24 +234,24 @@ int stm32mp2_ddr_dt_init(void)
 	case EEPROM_RAM_SIZE_512MB_32:
 			IMSG("512MB 32 bits RAM configuration used");
 			drv_cfg.info.size = size_512mb;
-			drv_cfg.c_timing.rfshtmg = rfshtmg_512mb;
-			drv_cfg.c_timing.dramtmg14 = dramtmg14_512mb;
+			drv_cfg.c_timing.rfshtmg = rfshtmg_512mbx32;
+			drv_cfg.c_timing.dramtmg14 = dramtmg14_512mbx32;
 			drv_cfg.c_map = c_map_512mbx32;
 		break;
 
 	case EEPROM_RAM_SIZE_1GB_32:
 			IMSG("1GB 32 bits RAM configuration used");
 			drv_cfg.info.size = size_1gb;
-			drv_cfg.c_timing.rfshtmg = rfshtmg_1gb;
-			drv_cfg.c_timing.dramtmg14 = dramtmg14_1gb;
+			drv_cfg.c_timing.rfshtmg = rfshtmg_1gbx32;
+			drv_cfg.c_timing.dramtmg14 = dramtmg14_1gbx32;
 			drv_cfg.c_map = c_map_1gbx32;
 		break;
 
 	case EEPROM_RAM_SIZE_4GB_32:
 			IMSG("4GB 32 bits RAM configuration used");
 			drv_cfg.info.size = size_4gb;
-			drv_cfg.c_timing.rfshtmg = rfshtmg_4gb;
-			drv_cfg.c_timing.dramtmg14 = dramtmg14_4gb;
+			drv_cfg.c_timing.rfshtmg = rfshtmg_4gbx32;
+			drv_cfg.c_timing.dramtmg14 = dramtmg14_4gbx32;
 			drv_cfg.c_map = c_map_4gbx32;
 		break;
 
@@ -253,8 +259,8 @@ int stm32mp2_ddr_dt_init(void)
 			IMSG("512MB 16 bits RAM configuration used");
 			drv_cfg.info.size = size_512mb;
 			drv_cfg.c_reg.mstr = mstr_16;
-			drv_cfg.c_timing.rfshtmg = rfshtmg_512mb;
-			drv_cfg.c_timing.dramtmg14 = dramtmg14_512mb;
+			drv_cfg.c_timing.rfshtmg = rfshtmg_512mbx16;
+			drv_cfg.c_timing.dramtmg14 = dramtmg14_512mbx16;
 			drv_cfg.c_map = c_map_512mbx16;
 			drv_cfg.uib.numactivedbytedfi1 = numactivedbytedfi1_16;
 		break;
@@ -263,8 +269,8 @@ int stm32mp2_ddr_dt_init(void)
 			IMSG("1GB 16 bits RAM configuration used");
 			drv_cfg.info.size = size_1gb;
 			drv_cfg.c_reg.mstr = mstr_16;
-			drv_cfg.c_timing.rfshtmg = rfshtmg_1gb;
-			drv_cfg.c_timing.dramtmg14 = dramtmg14_1gb;
+			drv_cfg.c_timing.rfshtmg = rfshtmg_1gbx16;
+			drv_cfg.c_timing.dramtmg14 = dramtmg14_1gbx16;
 			drv_cfg.c_map = c_map_1gbx16;
 			drv_cfg.uib.numactivedbytedfi1 = numactivedbytedfi1_16;
 		break;
@@ -272,6 +278,8 @@ int stm32mp2_ddr_dt_init(void)
 	case EEPROM_RAM_SIZE_2GB_16:
 			IMSG("2GB 16 bits RAM configuration used");
 			drv_cfg.c_reg.mstr = mstr_16;
+			drv_cfg.c_timing.rfshtmg = rfshtmg_2gbx16;
+			drv_cfg.c_timing.dramtmg14 = dramtmg14_2gbx16;
 			drv_cfg.c_map = c_map_2gbx16;
 			drv_cfg.uib.numactivedbytedfi1 = numactivedbytedfi1_16;
 		break;
