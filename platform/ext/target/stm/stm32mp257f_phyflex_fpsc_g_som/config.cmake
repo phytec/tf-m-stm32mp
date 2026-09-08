@@ -8,14 +8,8 @@
 # set board specific config
 ########################## STM32 #######################################
 #Before Soc config
-set(STM32_STM32MP257f_EV1_REV   "revA"				    CACHE STRING	"Select ev1 board revision: revA" FORCE)
 
 SET(DTS_BOARD_BASE "arm/stm/stm32mp257f-ev1")
-
-if (NOT STM32_STM32MP257f_EV1_REV STREQUAL "revA")
-	message(FATAL_ERROR "Board revision not defined by st")
-	string(APPEND DTS_BOARD_BASE "-${STM32_STM32MP257f_EV1_REV}")
-endif()
 
 # set common soc config
 if (EXISTS ${STM_SOC_DIR}/config.cmake)
@@ -24,5 +18,9 @@ endif()
 
 #After soc config
 set(STM32_BOARD_MODEL "stm32mp257f phyflex" CACHE STRING "Define board model name" FORCE)
-set(STM32_DDR_PHY_FILE "lpddr4_pmu_train.bin" CACHE STRING "Set ddr phy binary name need for your board" FORCE)
-set(TFM_PARTITION_PROTECTED_STORAGE     OFF                     CACHE BOOL      "Enable Protected Storage partition" FORCE)
+set(STM32_DDR_PHY_FILE                  "lpddr4_pmu_train.bin"	CACHE STRING	"Set ddr phy binary name need for your board" FORCE)
+set(STM32_DDR_TYPE                      STM32MP_LPDDR4_TYPE		CACHE STRING	"Set ddr type flag" FORCE)
+
+if (EXISTS ${STM32_CA35_FW})
+    set(STM32_CA35_FW_SLOT_SIZE  0x200000               CACHE STRING	"Cortex-A35 Firmware slot size in SDMMC interface boot device" FORCE)
+endif()
