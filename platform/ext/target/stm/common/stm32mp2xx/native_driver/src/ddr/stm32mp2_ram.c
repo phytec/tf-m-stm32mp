@@ -27,6 +27,7 @@
  * Max ddr size is 0xE000 0000 - DDR_MEM_BASE
  */
 #define DDR_MAX_SIZE	(0xE0000000 - DDR_MEM_BASE)
+#define TAMP_CONFIG_PHYTEC             U(0x1D0)
 
 uintptr_t stm32mp_ddrphyc_base(void)
 {
