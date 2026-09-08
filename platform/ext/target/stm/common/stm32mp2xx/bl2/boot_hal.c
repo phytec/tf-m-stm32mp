@@ -189,7 +189,6 @@ SYS_INIT(stm32mp2_watchdog_init, POST_CORE, 1);
   */
 int32_t boot_platform_init(void)
 {
-	char name[STM32_SOC_NAME_SIZE];
 	uint8_t eeprom_data[10];
 	uint32_t word;
 
@@ -223,20 +222,6 @@ int32_t boot_platform_init(void)
 			mmio_write_32(TAMP_BASE_NS + TAMP_CONFIG_PHYTEC + 8, word);
 		}
 	}
-
-	BOOT_LOG_INF("welcome to MCUboot: "MODEL_VERSION);
-
-	if (get_chip_info(name) == TFM_PLAT_ERR_SUCCESS)
-		BOOT_LOG_INF("cpu: %s", name);
-
-	BOOT_LOG_INF("board: "MODEL_BOARD);
-
-	if (get_board_info(name) == TFM_PLAT_ERR_SUCCESS)
-		BOOT_LOG_INF("board ID: %s", name);
-
-	BOOT_LOG_INF("dts: "MODEL_BL2_DTS);
-	BOOT_LOG_INF("boot device: "MODEL_BOOT_DEV);
-	BOOT_LOG_INF("mcu sysclk: %d", SystemCoreClock);
 
 	return 0;
 }
