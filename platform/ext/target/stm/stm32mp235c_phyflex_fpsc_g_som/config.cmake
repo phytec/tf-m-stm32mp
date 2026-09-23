@@ -1,0 +1,26 @@
+#-------------------------------------------------------------------------------
+# Copyright (c) 2020, Arm Limited. All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+
+# set board specific config
+########################## STM32 #######################################
+#Before Soc config
+
+SET(DTS_BOARD_BASE "arm/stm/stm32mp235c-ev1")
+
+# set common soc config
+if (EXISTS ${STM_SOC_DIR}/config.cmake)
+	include(${STM_SOC_DIR}/config.cmake)
+endif()
+
+#After soc config
+set(STM32_BOARD_MODEL "stm32mp235c phyflex" CACHE STRING "Define board model name" FORCE)
+set(STM32_DDR_PHY_FILE                  "lpddr4_pmu_train.bin"	CACHE STRING	"Set ddr phy binary name need for your board" FORCE)
+set(STM32_DDR_TYPE                      STM32MP_LPDDR4_TYPE		CACHE STRING	"Set ddr type flag" FORCE)
+
+if (EXISTS ${STM32_CA35_FW})
+    set(STM32_CA35_FW_SLOT_SIZE  0x200000               CACHE STRING	"Cortex-A35 Firmware slot size in SDMMC interface boot device" FORCE)
+endif()
